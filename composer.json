@@ -1,0 +1,16 @@
+{
+    "name": "siaoynli/laravel-uploads",
+    "description": "laravel upload file package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "siaoynli",
+            "email": "siaoynli@126.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Siaoynli\\Upload\\": "src/"
+        }
+    }
+}
