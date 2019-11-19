@@ -52,6 +52,11 @@ class Upload
         $field = $field ?: $this->config["name"];
 
         $file = request()->file($field);
+
+        if(!$file) {
+            return ['state' => '文件上传失败'];
+        }
+
         if ($file->isValid()) {
             //文件后缀小写
             $ext = strtolower($file->getClientOriginalExtension());
