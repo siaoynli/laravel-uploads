@@ -19,10 +19,12 @@ class Upload
     protected $config;
     protected $info;
     protected $type = "image";
+    protected $disk = "";
 
     public function __construct(Repository $config)
     {
         $this->config = $config->get("upload");
+        $this->disk = $this->config['disk'];
     }
 
     /**
@@ -36,6 +38,13 @@ class Upload
     public function type($type)
     {
         $this->type = $type;
+        return $this;
+    }
+
+
+    public function disk($name = "public")
+    {
+        $this->disk = $name;
         return $this;
     }
 
@@ -53,7 +62,7 @@ class Upload
 
         $file = request()->file($field);
 
-        if(!$file) {
+        if (!$file) {
             return ['state' => '文件上传失败'];
         }
 
@@ -67,7 +76,7 @@ class Upload
             $extension = $this->config['extensions'][$this->type];
 
             //如果设置了后缀则判断
-            if(!in_array('*',$extension)){
+            if (!in_array('*', $extension)) {
                 if (!in_array($ext, $extension)) {
                     return ['state' => '不允许上传的类型'];
                 }
@@ -89,7 +98,11 @@ class Upload
 
             $content = file_get_contents($realPath);
 
-            if (in_array($this->type, $this->config['public'])) {
+            if ($this->disk) {
+                if (!Storage::disk($this->disk)->put($filename, $content)) {
+                    return ['state' => '文件上传失败，请确保disk:' . $this->disk . '目录可写'];
+                }
+            } else {
                 if (!is_dir(public_path($path))) {
                     try {
                         mkdir(public_path($path), 0777, true);
@@ -101,24 +114,18 @@ class Upload
                     return ['state' => '文件上传失败，请确保public目录可写'];
                 }
             }
-            if (in_array($this->type, $this->config['storage'])) {
-                if (!Storage::disk('local')->put($filename, $content)) {
-                    return ['state' => '文件上传失败，请确保storage目录可写'];
-                }
-            }
+
             return [
                 'state' => 'SUCCESS',
                 'original_name' => $name,
+                'disk_name' => $this->disk,
                 'ext' => $ext,
                 'mime' => $mimetype,
                 'size' => $size,
                 'url' => '/' . $filename,
             ];
-
         } else {
             return ['state' => '文件上传失败'];
         }
-
     }
-
 }

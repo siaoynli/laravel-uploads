@@ -34,15 +34,10 @@ return [
             "xlt",
         ],
         //所有类型
-        "file"=>[
+        "file" => [
             "*"
         ]
     ],
-    //上传到public目录文件类型
-    "public" => [
-        "attach",
-        "image"
-    ],
-    //存储到storage目录的文件类型，可以用来存储原始文件，私有文件
-    "storage" => [],
+    //上传到指定disk,如果为空，则上传到public目录
+    "disk" => "",
 ];
