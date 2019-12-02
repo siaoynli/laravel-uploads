@@ -2,7 +2,7 @@
 return [
     //上传文件字段名
     "name" => "file",
-    //上传路径，相对public 和 storage/app 目录
+    //上传路径，相对public 或disk目录
     "path" => "uploads",
 
     //允许大小 kb
