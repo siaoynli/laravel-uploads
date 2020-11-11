@@ -117,7 +117,7 @@ class Upload
 
             return [
                 'state' => 'SUCCESS',
-                'original_name' => $name,
+                'original' => $name,
                 'disk_name' => $this->disk,
                 'ext' => $ext,
                 'mime' => $mimetype,
