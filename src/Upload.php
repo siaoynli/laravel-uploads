@@ -18,7 +18,7 @@ class Upload
 
     protected $config;
     protected $info;
-    protected $type = "image";
+    protected $type = "images";
     protected $disk = "";
 
     public function __construct(Repository $config)

@@ -9,20 +9,20 @@ return [
     "size" => 1024 * 50,
     //允许的后缀，* 表示允许任意类型
     "extensions" => [
-        "image" => [
+        "images" => [
             "jpg",
             "jpeg",
             "png",
             "bmp",
             "gif"
         ],
-        "video" => [
+        "videos" => [
             "mp4",
             "flv",
             "mkv",
             "avi"
         ],
-        "attach" => [
+        "attaches" => [
             "zip",
             "rar",
             "doc",
@@ -34,7 +34,7 @@ return [
             "xlt",
         ],
         //所有类型
-        "file" => [
+        "files" => [
             "*"
         ]
     ],
