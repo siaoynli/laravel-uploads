@@ -76,8 +76,9 @@ class Upload
                     return ['state' => '获取不到文件的类型，请勿非法操作'];
                 }
                 $_mimeTypes = new \Symfony\Component\Mime\MimeTypes();
-                if(!in_array($ext,$_mimeTypes->getExtensions($mimetype))) {
-                    return ['state' => '上传文件后缀和真实文件类型不匹配'];
+                $exts=$_mimeTypes->getExtensions($mimetype);
+                if(!in_array($ext,$exts)) {
+                    return ['state' => '上传文件后缀'.$ext.'和真实文件类型['.implode(',',$exts).']不匹配'];
                 }
             }
 
