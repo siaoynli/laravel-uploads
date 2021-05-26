@@ -78,9 +78,10 @@ class Upload
                 $_mimeTypes = new \Symfony\Component\Mime\MimeTypes();
                 $exts=$_mimeTypes->getExtensions($mimetype);
                 if(!in_array($ext,$exts)) {
-                    return ['state' => '上传文件后缀'.$ext.'和真实文件类型['.implode(',',$exts).']不匹配'];
+                    return ['state' => '上传文件后缀:'.$ext.'和真实文件类型:['.implode(',',$exts).']不匹配'];
                 }
             }
+
 
             //获取文件大小
             $size = $file->getSize();
