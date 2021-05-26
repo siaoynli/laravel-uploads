@@ -40,4 +40,5 @@ return [
     ],
     //上传到指定disk,如果为空，则上传到public目录
     "disk" => "",
+    "strict_mode"=>false,
 ];

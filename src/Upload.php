@@ -69,6 +69,18 @@ class Upload
         if ($file->isValid()) {
             //文件后缀小写
             $ext = strtolower($file->getClientOriginalExtension());
+            if($this->config['strict_mode'] == true) {
+                //获取mime类型
+                $mimetype= $file->getMimeType();
+                if($mimetype ==null) {
+                    return ['state' => '获取不到文件的类型，请勿非法操作'];
+                }
+                $_mimeTypes = new \Symfony\Component\Mime\MimeTypes();
+                if(!in_array($ext,$_mimeTypes->getExtensions($mimetype))) {
+                    return ['state' => '上传文件后缀和真实文件类型不匹配'];
+                }
+            }
+
             //获取文件大小
             $size = $file->getSize();
 
