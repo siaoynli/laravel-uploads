@@ -59,3 +59,4 @@ array:6 [▼
 
 ```
 
+> strict mode 值为true，即严格校验文件
